@@ -33,7 +33,7 @@ clone仓库到本地
 增加文件后，
   git add hello.php 将文件hello.php暂存区
   git commit -m "Add hello script by php" 提交
-  git log 查看提交日志
+  git log 查看提交日志(只能看以当前状态为终点的历史日志)
   git push 更新github仓库
 初始化仓库
   mkdir git_tutorial
@@ -57,3 +57,37 @@ clone仓库到本地
   git diff 
 
 分支操作
+  git branch  #master分支左侧有*号
+  git checkout -b feature-A  #以当前master为基础创建分支feature-A
+    #等同 git branch feature-A,git checkout feature-A
+  git checkout master  #切换到master
+  git checkout -       #切换回上一个分支
+  topic(特性)分支
+    日常开发中创建数个特性分支
+    保留一个可发布稳定分支(通常用master)
+    出现bug则创建新分支，在新分支中修正
+主干分支
+  通常用master担当，可用Tag标签创建版本信息
+  有多个版本发布时，主干也可有多个
+合并分支
+  git checkout master  #首先切换到主分支
+  git merge --no-ff feature-A  #合并分支到主分支
+  git log --graph   #以图表形式查看分支，注意每个commit的hash值
+  git reset --hard <某个commit的hash值>  #回溯到某个版本
+  git reflog #查看当前仓库执行过的操作日志
+  git checkout master  #切换到主分支
+  git reset --hard <reflog中选定状态的hash值>  #回复回溯前的状态
+  git merge --no-ff fix-B  #合并fix-B到主分支
+    如果有冲突，编辑解决后，用git add和git commit提交，简写 git commit -am
+  git commit --amend    #修改提交信息，可用git log --graph检查
+  git rebase -i HEAD~2
+    编辑当前分支中包含HEAD(最新提交)在内的2个最新历史记录
+    保存后，切换并合并到master
+推送到远程仓库
+  git remote add  #添加到远程仓库，创建时不要勾选README选项
+  git remote add origin git@github.com:github-book/git-tutorial.git
+    将git-tutorial.git远程仓库的名称设置为origin
+  git push -u origin master  #推送master到远程仓库origin的master分支
+    -u 参数将origin仓库设置为本地master的上游upstream
+  git checkout -b feature-B
+  git push -u origin feature-B  #将分支feature-B推送给origin仓库，GitHub可看到
