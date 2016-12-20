@@ -1,0 +1,59 @@
+GitHub
+GitHub是为开发者提供Git仓库的托管服务，并提供一系列功能。
+通过pull request请求合并，
+通过“@用户名，@组织名/团队”对特定用户/组织or团队评论，
+通过“#编号，用户名/仓库名#编号”链接到仓库所对应的Issue编号，
+使用GFM格式描述语法。
+GitHub主要功能有：Git仓库，Organization，Issue，Pull request，Wiki
+创建GitHub账户
+  https://github.com  vogueteo(vogue_teo.yeah.net)
+使用社区功能
+  follow(关注)别人，该用户的活动出现在面板中
+创建仓库
+  new repository -> name -> public -> Init(添加已有不勾选Readme）
+  Add .gitigmore 用于仓库中不需要进行管理的文件
+
+安装git
+设置姓名和邮箱地址(会自动创建~/.gitconfig文件)
+  git config --global user.name "Firstname Lastname"
+  git config --global user.email "your_email@.example.com"
+  git config --global color.ui auto  #提高可读性
+git_bash创建ssh key
+  ssh-keygen -t rsa -C "vogue_teo@yeah.net"
+  私钥id_rsa   公钥id_rsa.pub
+github添加公钥
+  settings->ssh and gpg keys->new ssh key 黏贴公钥
+git与github认证
+  ssh -T git@github.com
+  输入yes和密码，检查认证结果 (本地必须有私钥)
+（学习github flavored markdown （GFM）语法，编写文档）
+clone仓库到本地
+  git clone git@github.com:vogueteo/lflask.git
+  cd lflask
+增加文件后，
+  git add hello.php 将文件hello.php暂存区
+  git commit -m "Add hello script by php" 提交
+  git log 查看提交日志
+  git push 更新github仓库
+初始化仓库
+  mkdir git_tutorial
+  cd git_tutorial
+  git init
+查看仓库状态
+  git status  #initial commit
+  touch README.md
+  git status  #README.md untracked
+  git add README.md #必须加到暂存区才会被track
+  git status  #README.md changed to be committed
+  git commit -m "message for commit" 
+    如果需要提交详细细腻，不用-m提交，则提交后自动打开编辑器输入提交信息
+    提交信息格式：line1 simple descirption , line2  blank , line3... reason&details
+    #开头的行都是注释
+    如果编辑器启动后中止提交，则将提交信息留空并直接关闭编辑，提交会被中止
+  git log --pretty=short 只显示提交信息的第一行（简述行）
+  git log README.md  只显示特定文件/目录的提交信息
+查看差别
+  git log -p  显示文件的改动
+  git diff 
+
+分支操作
